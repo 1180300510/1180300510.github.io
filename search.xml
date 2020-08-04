@@ -8,15 +8,4 @@
         <category>Hexo</category>
       </categories>
   </entry>
-  <entry>
-    <title>auto 详解</title>
-    <url>/undefined/e88c218f.html</url>
-    <content><![CDATA[<blockquote>
-<p>auto在C++11引入，可以在声明变量的时候，根据变量初始值的类型自动为此变量选择匹配的类型</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-  </entry>
 </search>
