@@ -8,4 +8,17 @@
         <category>Hexo</category>
       </categories>
   </entry>
+  <entry>
+    <title>机器学习的基本知识</title>
+    <url>/undefined/c1a7cca9.html</url>
+    <content><![CDATA[<h3 id="1、机器学习的定义"><a href="#1、机器学习的定义" class="headerlink" title="1、机器学习的定义"></a>1、机器学习的定义</h3><p> 机器学习并不存在一个广泛认可的定义，这里给出两位前辈对机器学习的定义。Arthur Samuel提出的是一个旧的非正式的定义：机器学习是一个在不使用显式编程的情况下，给予计算机学习能力的领域。</p>
+<p>Tom Mitchell给出一个更现代化的定义：一个程序被认为能从经验E中学习，解决任务T，达到一个性能度量值P，当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升，并且当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升。一个非常应景的例子就是AI下棋，任务T是下棋，经验E就是上万次自我对弈联系的经验，而度量值T就是AI和新的对手下棋时，赢得比赛的概率。</p>
+<h3 id="2、监督学习与非监督学习"><a href="#2、监督学习与非监督学习" class="headerlink" title="2、监督学习与非监督学习"></a>2、监督学习与非监督学习</h3>]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
 </search>
