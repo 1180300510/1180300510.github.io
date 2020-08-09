@@ -29,4 +29,23 @@
         <category>Hexo</category>
       </categories>
   </entry>
+  <entry>
+    <title>数学有关的算法题</title>
+    <url>/undefined/6591a58c.html</url>
+    <content><![CDATA[<h2 id="洛谷题目汇总（更新中）"><a href="#洛谷题目汇总（更新中）" class="headerlink" title="洛谷题目汇总（更新中）"></a>洛谷题目汇总（更新中）</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><blockquote>
+<p><font size=4>求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font></p>
+</blockquote>
+<p>这道题主要是寻找规律，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数。</p>
+<img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200809221717671.png" alt="image-20200809221717671" style="zoom: 67%;" />
+
+<p>很容易发现，第一行为相邻数相差1，第二行相邻数相差2，依次类推，列也是如此。将这些数相加，可以找到和与顶点个数之间的关系，如果想要严格证明可以采用数学归纳法，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
+<p>接下来的问题就是编程解决组合数的求解。</p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
 </search>
