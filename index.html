@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-14 20:45:30" itemprop="dateModified" datetime="2020-08-14T20:45:30+08:00">2020-08-14</time>
+                <time title="修改时间：2020-08-14 20:54:46" itemprop="dateModified" datetime="2020-08-14T20:54:46+08:00">2020-08-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +238,6 @@
 
 </blockquote>
 <p>这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数</p>
-<p><img src="/undefined/6591a58c/Program Files\blog\Hexo\source\_posts\Algorithm-math\math_1.png" alt></p>
 <p>将这些数（每个顶点引出的对角线的相交顶点个数）相加，可以找到和与顶点个数之间的关系，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
 <p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<del>组合数学学得实在差</del>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了<strong>从n个顶点中取四个不同顶点的取法</strong>，就是一个非常简单的组合数学。</p>
 <p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)<em>(n-1)</em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n<em>(n-1)/2 </em>(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
