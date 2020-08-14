@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello, My Blog!</title>
-    <url>/undefined/cd2b7135.html</url>
-    <content><![CDATA[<h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a class="header-anchor" href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog">¶</a>I want to test whether the article can subscribe to my blog!</h2>
+    <title>数学有关的算法题</title>
+    <url>/undefined/6591a58c.html</url>
+    <content><![CDATA[<h2 id="洛谷题目汇总（更新中）"><a class="header-anchor" href="#洛谷题目汇总（更新中）">¶</a>洛谷题目汇总（更新中）</h2>
+<h3 id="1"><a class="header-anchor" href="#1">¶</a>1</h3>
+<blockquote>
+<p><font size=4>求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font></p>
+</blockquote>
+<p>这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数。</p>
+<img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200809221717671.png" alt="image-20200809221717671" style="zoom: 67%;" />
+<p>将这些数（每个顶点引出的对角线的相交顶点个数）相加，可以找到和与顶点个数之间的关系，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
+<p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<s>组合数学学得实在差</s>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了从n个顶点中取四个不同顶点的取法，就是一个非常简单的组合数学。</p>
+<p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)*(n-1)<em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n</em>(n-1)/2 *(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
 ]]></content>
       <categories>
-        <category>Hexo</category>
+        <category>Algorithm</category>
       </categories>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
   </entry>
   <entry>
     <title>机器学习的基本知识</title>
@@ -33,24 +45,12 @@
       </tags>
   </entry>
   <entry>
-    <title>数学有关的算法题</title>
-    <url>/undefined/6591a58c.html</url>
-    <content><![CDATA[<h2 id="洛谷题目汇总（更新中）"><a class="header-anchor" href="#洛谷题目汇总（更新中）">¶</a>洛谷题目汇总（更新中）</h2>
-<h3 id="1"><a class="header-anchor" href="#1">¶</a>1</h3>
-<blockquote>
-<p><font size=4>求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font></p>
-</blockquote>
-<p>这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数。</p>
-<img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200809221717671.png" alt="image-20200809221717671" style="zoom: 67%;" />
-<p>将这些数（每个顶点引出的对角线的相交顶点个数）相加，可以找到和与顶点个数之间的关系，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
-<p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<s>组合数学学得实在差</s>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了从n个顶点中取四个不同顶点的取法，就是一个非常简单的组合数学。</p>
-<p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)*(n-1)<em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n</em>(n-1)/2 *(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
+    <title>Hello, My Blog!</title>
+    <url>/undefined/cd2b7135.html</url>
+    <content><![CDATA[<h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a class="header-anchor" href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog">¶</a>I want to test whether the article can subscribe to my blog!</h2>
 ]]></content>
       <categories>
-        <category>Algorithm</category>
+        <category>Hexo</category>
       </categories>
-      <tags>
-        <tag>Algorithm</tag>
-      </tags>
   </entry>
 </search>
