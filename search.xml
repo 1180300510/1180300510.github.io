@@ -40,6 +40,38 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo的Latex公式渲染</title>
+    <url>/post/856f669.html</url>
+    <content><![CDATA[<h3 id="问题的发现"><a href="#问题的发现" class="headerlink" title="问题的发现"></a>问题的发现</h3><blockquote>
+<font size="4">在本地撰写博客时，通常会使用到数学公式，而在之前的学习中我们已经学习了LaTeX的基本语法，所以在本地的md文件编写中，我们写出来了不错的数学公式。然而，令人悲伤的故事发生了，当我将本地md文件上传到我的博客上时，LaTeX语法失效了，专业的说法就是渲染失败。对网页渲染一无所知的我还是走上了搜索的老路，在查阅相关资料之后，在这里做一个记录。</font>
+
+
+
+</blockquote>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Hexo默认使用hexo-renderer-marked的引擎来渲染网页，该引擎会将一些markdown符号转换为相应的html标签，比如加粗，斜体，代码块，引用等。Typora使用MathJax引擎来渲染公式，对于某些符号会和hexo-renderer-marked的引擎产生含义的冲突，因此就会出现渲染失败的情况。</p>
+<p>举一个简单的例子，公式中如果出现两个“<em>”，那么这两个 “\</em>”之间的字体就会变成斜体，而又出现两个下划线“_”时，公式中出现斜体的内容就被渲染成了\<em>标签：</em></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;em&gt;&#125;)&#x3D;\frac&#123;x-x^&lt;&#x2F;em&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="修改渲染引擎"><a href="#修改渲染引擎" class="headerlink" title="修改渲染引擎"></a>修改渲染引擎</h4><p>最直接的方法就是替换hexo的渲染引擎，其中有一个是hexo-renderer-marked的改进版hexo-renderer-kramed，在git中执行下面的命令即可</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+<p>对于上述出现的冲突做出了修改，但只是解决了公式块的语义冲突，行内代码仍然需要我们再一步进行修改。</p>
+<p>在博客的根目录下找到<strong>node_modules/kramed/lib/rules/inline.js​</strong>文件，修改其inline变量如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> inline = &#123;</span><br><span class="line">  <span class="comment">//escape: /^\\([\\`*&#123;&#125;\[\]()#$+\-.!_&gt;])/,</span></span><br><span class="line">  <span class="built_in">escape</span>: <span class="regexp">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,</span><br><span class="line">  autolink: <span class="regexp">/^&lt;([^ &gt;]+(@|:\/)[^ &gt;]+)&gt;/</span>,</span><br><span class="line">  url: noop,</span><br><span class="line">  html: <span class="regexp">/^&lt;!--[\s\S]*?--&gt;|^&lt;(\w+(?!:\/|[^\w\s@]*@)\b)*?(?:"[^"]*"|'[^']*'|[^'"&gt;])*?&gt;([\s\S]*?)?&lt;\/\1&gt;|^&lt;(\w+(?!:\/|[^\w\s@]*@)\b)(?:"[^"]*"|'[^']*'|[^'"&gt;])*?&gt;/</span>,</span><br><span class="line">  link: <span class="regexp">/^!?\[(inside)\]\(href\)/</span>,</span><br><span class="line">  reflink: <span class="regexp">/^!?\[(inside)\]\s*\[([^\]]*)\]/</span>,</span><br><span class="line">  nolink: <span class="regexp">/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/</span>,</span><br><span class="line">  reffn: <span class="regexp">/^!?\[\^(inside)\]/</span>,</span><br><span class="line">  strong: <span class="regexp">/^__([\s\S]+?)__(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/</span>,</span><br><span class="line">  <span class="comment">//em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span></span><br><span class="line">  em: <span class="regexp">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span><br><span class="line">  code: <span class="regexp">/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/</span>,</span><br><span class="line">  br: <span class="regexp">/^ &#123;2,&#125;\n(?!\s*$)/</span>,</span><br><span class="line">  del: noop,</span><br><span class="line">  text: <span class="regexp">/^[\s\S]+?(?=[\\&lt;!\[_*`$]| &#123;2,&#125;\n|$)/</span>,</span><br><span class="line">  math: <span class="regexp">/^\$\$\s*([\s\S]*?[^\$])\s*\$\$(?!\$)/</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>escape去掉对\ , { , }这三个符号的转义， em去掉了\<em>标签的转义。</em></p>
+<h4 id="修改主题配置文件"><a href="#修改主题配置文件" class="headerlink" title="修改主题配置文件"></a>修改主题配置文件</h4><p>在Theme的目录下，修改_config.yml主题配置文件，修改math项</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Math Formulas Render Support</span></span><br><span class="line"><span class="attr">math:</span></span><br><span class="line">  <span class="comment"># Default (true) will load mathjax / katex script on demand.</span></span><br><span class="line">  <span class="comment"># That is it only render those page which has `mathjax: true` in Front-matter.</span></span><br><span class="line">  <span class="comment"># If you set it to false, it will load mathjax / katex srcipt EVERY PAGE.</span></span><br><span class="line">  <span class="attr">per_page:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># hexo-renderer-pandoc (or hexo-renderer-kramed) required for full MathJax support.</span></span><br><span class="line">  <span class="attr">mathjax:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># See: https://mhchem.github.io/MathJax-mhchem/</span></span><br><span class="line">    <span class="attr">mhchem:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># hexo-renderer-markdown-it-plus (or hexo-renderer-markdown-it with markdown-it-katex plugin) required for full Katex support.</span></span><br><span class="line">  <span class="attr">katex:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># See: https://github.com/KaTeX/KaTeX/tree/master/contrib/copy-tex</span></span><br><span class="line">    <span class="attr">copy_tex:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>这里我使用MathJax作为LaTeX的渲染工具，因此将enable置为true，mhchem是化学的相关公式，可以根据个人需要，katex是另一种数学公式的渲染工具，由于同时只能使用一种，因此enable置为false。</p>
+<p>对于需要使用LaTeX公式的文章，在文章的Front-matter中置mathjax为true。</p>
+<p>这是我的另一篇博文的Front-matter</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">title: 数学有关的算法题</span><br><span class="line">categories: Algorithm</span><br><span class="line">tags: Algorithm</span><br><span class="line">mathjax: true</span><br><span class="line">abbrlink: 6591a58c</span><br><span class="line">date: 2020-08-09 18:21:57</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello, My Blog!</title>
     <url>/post/cd2b7135.html</url>
     <content><![CDATA[<h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog" class="headerlink" title="I want to test whether the article can subscribe to my blog!"></a>I want to test whether the article can subscribe to my blog!</h2>]]></content>
