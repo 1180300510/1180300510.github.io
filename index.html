@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-14 15:32:37" itemprop="dateModified" datetime="2020-08-14T15:32:37+08:00">2020-08-14</time>
+                <time title="修改时间：2020-08-14 15:51:35" itemprop="dateModified" datetime="2020-08-14T15:51:35+08:00">2020-08-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -214,7 +214,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>593</span>
+              <span>582</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -233,19 +233,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="洛谷题目汇总（更新中）"><a class="header-anchor" href="#洛谷题目汇总（更新中）">¶</a>洛谷题目汇总（更新中）</h2>
-<h3 id="1"><a class="header-anchor" href="#1">¶</a>1</h3>
-<blockquote>
-<p><font size=4>求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font></p>
+          <h2 id="洛谷题目汇总（更新中）"><a href="#洛谷题目汇总（更新中）" class="headerlink" title="洛谷题目汇总（更新中）"></a>洛谷题目汇总（更新中）</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><blockquote>
+<font size=4>求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font>
+
 </blockquote>
 <p>这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数。</p>
-<img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200809221717671.png" alt="image-20200809221717671" style="zoom: 67%;" />
+<p><img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200809221717671.png" alt="image-20200809221717671" style="zoom: 67%;" /></p>
 <p>将这些数（每个顶点引出的对角线的相交顶点个数）相加，可以找到和与顶点个数之间的关系，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
-<p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<s>组合数学学得实在差</s>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了从n个顶点中取四个不同顶点的取法，就是一个非常简单的组合数学。</p>
-<p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)*(n-1)<em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n</em>(n-1)/2 *(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
-<p>$$<br>
-2^n<br>
-$$</p>
+<p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<del>组合数学学得实在差</del>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了从n个顶点中取四个不同顶点的取法，就是一个非常简单的组合数学。</p>
+<p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)<em>(n-1)</em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n<em>(n-1)/2 </em>(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
 
       
     </div>
@@ -333,18 +329,15 @@ $$</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1、机器学习的定义"><a class="header-anchor" href="#1、机器学习的定义">¶</a>1、机器学习的定义</h3>
-<p>机器学习并不存在一个广泛认可的定义，这里给出两位前辈对机器学习的定义。Arthur Samuel提出的是一个旧的非正式的定义：机器学习是一个在不使用显式编程的情况下，给予计算机学习能力的领域。</p>
+          <h3 id="1、机器学习的定义"><a href="#1、机器学习的定义" class="headerlink" title="1、机器学习的定义"></a>1、机器学习的定义</h3><p> 机器学习并不存在一个广泛认可的定义，这里给出两位前辈对机器学习的定义。Arthur Samuel提出的是一个旧的非正式的定义：机器学习是一个在不使用显式编程的情况下，给予计算机学习能力的领域。</p>
 <p>Tom Mitchell给出一个更现代化的定义：一个程序被认为能从经验E中学习，解决任务T，达到一个性能度量值P，当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升，并且当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升。一个非常应景的例子就是AI下棋，任务T是下棋，经验E就是上万次自我对弈联系的经验，而度量值T就是AI和新的对手下棋时，赢得比赛的概率。</p>
-<h3 id="2、监督学习（supervised-learning）"><a class="header-anchor" href="#2、监督学习（supervised-learning）">¶</a>2、监督学习（supervised learning）</h3>
-<p>给定一个数据集，我们事先已经知道了结果，或者说<strong>正确答案</strong>，而监督学习算法正是对该数据集做一种预测，是处于输入和输出之间的桥梁。监督学习可以分成两大类：回归和分类。在回归问题中，预测结果将是一个连续的输出，意味着需要将输入的变量映射到某个连续函数中，线性，二次函数等，因此也就有了线性回归，二次回归等。而在分类问题中，预测结果将是一个离散的输出，也就是若干个离散点的集合。</p>
+<h3 id="2、监督学习（supervised-learning）"><a href="#2、监督学习（supervised-learning）" class="headerlink" title="2、监督学习（supervised learning）"></a>2、监督学习（supervised learning）</h3><p>给定一个数据集，我们事先已经知道了结果，或者说<strong>正确答案</strong>，而监督学习算法正是对该数据集做一种预测，是处于输入和输出之间的桥梁。监督学习可以分成两大类：回归和分类。在回归问题中，预测结果将是一个连续的输出，意味着需要将输入的变量映射到某个连续函数中，线性，二次函数等，因此也就有了线性回归，二次回归等。而在分类问题中，预测结果将是一个离散的输出，也就是若干个离散点的集合。</p>
 <p>一个回归问题的例子：给定一个房子大小和价格的数据集，预测某大小的房子的价格。而大小和价格之间可以使用一个连续函数来近似地表示，因此这就是一个回归问题。</p>
-<img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200808101219015.png" alt="image-20200808101219015" style="zoom:67%;" />
+<p><img src="C:\Users\star_sky\AppData\Roaming\Typora\typora-user-images\image-20200808101219015.png" alt="image-20200808101219015" style="zoom:67%;" /></p>
 <p>一个分类问题的例子：编写一个软件来检查客户的账户是否遭受过黑客的入侵，这就是一个典型的分类问题，可以将每个账户（样本）标记为正样本和负样本，比如可以用0表示预测为安全，1表示预测为账户被入侵。因此就可以使用监督学习来预测每一个离散值。</p>
-<h3 id="3、无监督学习（unsupervised-learning）"><a class="header-anchor" href="#3、无监督学习（unsupervised-learning）">¶</a>3、无监督学习（unsupervised learning）</h3>
-<p>无监督学习和监督学习最大的不同就是给定的数据集并<strong>没有标签或者属性</strong>，也可以认为所有的数据都是一样的，没有区别的。而我们事先是不知道指一些数据会拥有什么意思，就像在一堆杂乱的东西中找到某一些共同的东西或结构。无监督学习中最重要的算法之一就是聚类算法，这里仅仅做一个简单介绍。</p>
+<h3 id="3、无监督学习（unsupervised-learning）"><a href="#3、无监督学习（unsupervised-learning）" class="headerlink" title="3、无监督学习（unsupervised learning）"></a>3、无监督学习（unsupervised learning）</h3><p>无监督学习和监督学习最大的不同就是给定的数据集并<strong>没有标签或者属性</strong>，也可以认为所有的数据都是一样的，没有区别的。而我们事先是不知道指一些数据会拥有什么意思，就像在一堆杂乱的东西中找到某一些共同的东西或结构。无监督学习中最重要的算法之一就是聚类算法，这里仅仅做一个简单介绍。</p>
 <p>一个无监督学习的例子，就是Google新闻的分类，他们从网络上手机成千上万的网络上的新闻，然后将他们分组，组成一个个新闻专题，而这些都是通过无监督学习，讲这些数量很大的行为自动的聚合在一起，即有关同一主题的新闻被聚集在一起，可能是来自BBC，CNN等不同报道。</p>
-<p>无监督学习算法还有一些比较经典的应用，比如说鸡尾酒宴问题，最简单的鸡尾酒宴问题就是输入两个录音，每个录音来自两个麦克风，记录两个人同步说话的声音。使用**“鸡尾酒会算法”**从录音输入中找到蕴含的分类，分离出两个被叠加在一起的音频源，也可以将环境声音分离。</p>
+<p>无监督学习算法还有一些比较经典的应用，比如说鸡尾酒宴问题，最简单的鸡尾酒宴问题就是输入两个录音，每个录音来自两个麦克风，记录两个人同步说话的声音。使用<strong>“鸡尾酒会算法”</strong>从录音输入中找到蕴含的分类，分离出两个被叠加在一起的音频源，也可以将环境声音分离。</p>
 
       
     </div>
@@ -413,7 +406,7 @@ $$</p>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>50</span>
+              <span>49</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -432,8 +425,7 @@ $$</p>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a class="header-anchor" href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog">¶</a>I want to test whether the article can subscribe to my blog!</h2>
-
+          <h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog" class="headerlink" title="I want to test whether the article can subscribe to my blog!"></a>I want to test whether the article can subscribe to my blog!</h2>
       
     </div>
 
@@ -623,6 +615,61 @@ $$</p>
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
