@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"tr0ipal7.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="洛谷题目汇总（更新中）1 求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$    这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数 将这些数（每个顶点引出的对角线的相交顶">
+  <meta name="description" content="数学相关编程题（更新中）洛谷题目汇总（更新中）1、组合数学简单应用 求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$    这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数学有关的算法题">
+<meta property="og:title" content="数学有关的编程题">
 <meta property="og:url" content="https://tr0ipal7.top/post/6591a58c.html">
 <meta property="og:site_name" content="旧时故梦">
-<meta property="og:description" content="洛谷题目汇总（更新中）1 求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$    这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数 将这些数（每个顶点引出的对角线的相交顶">
+<meta property="og:description" content="数学相关编程题（更新中）洛谷题目汇总（更新中）1、组合数学简单应用 求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$    这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ae01.alicdn.com/kf/H544215b82374426aba85558681f85ca8y.png">
 <meta property="article:published_time" content="2020-08-09T10:21:57.000Z">
-<meta property="article:modified_time" content="2020-08-14T13:19:50.241Z">
+<meta property="article:modified_time" content="2020-08-15T14:55:38.964Z">
 <meta property="article:author" content="Luke Tang">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>数学有关的算法题 | 旧时故梦</title>
+  <title>数学有关的编程题 | 旧时故梦</title>
   
 
 
@@ -186,7 +186,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          数学有关的算法题
+          数学有关的编程题
         </h1>
 
         <div class="post-meta">
@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-14 21:19:50" itemprop="dateModified" datetime="2020-08-14T21:19:50+08:00">2020-08-14</time>
+                <time title="修改时间：2020-08-15 22:55:38" itemprop="dateModified" datetime="2020-08-15T22:55:38+08:00">2020-08-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,14 +221,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>581</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -240,7 +240,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="洛谷题目汇总（更新中）"><a href="#洛谷题目汇总（更新中）" class="headerlink" title="洛谷题目汇总（更新中）"></a>洛谷题目汇总（更新中）</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><blockquote>
+        <h2 id="数学相关编程题（更新中）"><a href="#数学相关编程题（更新中）" class="headerlink" title="数学相关编程题（更新中）"></a>数学相关编程题（更新中）</h2><h2 id="洛谷题目汇总（更新中）"><a href="#洛谷题目汇总（更新中）" class="headerlink" title="洛谷题目汇总（更新中）"></a>洛谷题目汇总（更新中）</h2><h3 id="1、组合数学简单应用"><a href="#1、组合数学简单应用" class="headerlink" title="1、组合数学简单应用"></a>1、组合数学简单应用</h3><blockquote>
 <font size="4">求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font>
 
 </blockquote>
@@ -249,6 +249,16 @@
 <p><img src="https://ae01.alicdn.com/kf/H544215b82374426aba85558681f85ca8y.png" alt="math_1.png" title="math_1.png" width="50%"></p>
 <p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<del>组合数学学得实在差</del>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了<strong>从n个顶点中取四个不同顶点的取法</strong>，就是一个非常简单的组合数学。</p>
 <p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)<em>(n-1)</em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n<em>(n-1)/2 </em>(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
+<h3 id="2、素数求解"><a href="#2、素数求解" class="headerlink" title="2、素数求解"></a>2、素数求解</h3><p>素数是因数只有1和本身的数，在编程入门题中常常会出现求素数的题，比如说求某一个范围内的所有质数，最简单的做法就是遍历这一范围的数判断是否符合素数的特征。而判断一个数n是否为素数，最简单的方法就是<strong>枚举</strong>，从2开始遍历到$sqrt(n)$,判断是否可以被n整除。但是显然这个比较的次数比较多，在一些有时间限制的情况下不适用，这里给出一个简单的改进方法，可以减少判断的次数。</p>
+<p>对于所有大于等于5的素数来说，被6除的余数是1或者5，因此在判断素数时可以以6为步长进行判断，实例代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isprime</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//返回true为素数</span></span><br><span class="line">    <span class="keyword">if</span>(x&lt;=<span class="number">3</span>) <span class="keyword">return</span> x&gt;<span class="number">1</span>; </span><br><span class="line">    <span class="keyword">if</span>(x%<span class="number">6</span>!=<span class="number">1</span> &amp;&amp; x%<span class="number">6</span>!=<span class="number">5</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="built_in">sqrt</span>(x);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">5</span>;i&lt;=num;i+=<span class="number">6</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x%i==<span class="number">0</span>||(x%(i+<span class="number">2</span>)==<span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举的方法时间复杂度为$O(n^2)$，如果枚举的范围比较大时，还可以采用筛法来求素数。筛法的主要思路是：从小到大考虑每一个数，然后同时把当前这个数的所有在判断范围内的倍数即为合数，那么运行结束时没有被标记的就是素数了。第一遍筛掉的就是2的倍数（不包括2），第二遍筛掉的就是3的倍数（不包括3），第三遍筛掉的是5的倍数（4已被筛掉），依次类推。</p>
+<h5 id="埃拉托斯特尼筛法"><a href="#埃拉托斯特尼筛法" class="headerlink" title="埃拉托斯特尼筛法"></a>埃拉托斯特尼筛法</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Eratosthenes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//返回的是从2到n的范围内素数的个数</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">1000000</span>];<span class="comment">//保存素数</span></span><br><span class="line">    <span class="keyword">int</span> is_prime[<span class="number">1000000</span>];<span class="comment">//标记是否为素数</span></span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) is_prime[i] = <span class="number">1</span>;<span class="comment">//也可调用memset函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (is_prime[i]) &#123;</span><br><span class="line">        prime[p++] = i;  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i * i; j &lt;= n;j += i)  </span><br><span class="line">      <span class="comment">// 因为从 2 到 i - 1 的倍数我们之前筛过了，这里直接从 i的平方数开始，提高了运行速度</span></span><br><span class="line">          is_prime[j] = <span class="number">0</span>;  <span class="comment">// 是i的倍数的均不是素数</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该筛法的时间复杂度为$O(nloglogn)$，列出复杂度的数学表达式为$n\sum_p 1/p$，根据调和级数可以证明，在这里不做展开。</p>
+<p>继续考虑该筛法，发现对于同一个合数来说有可能被标记了很多次，比如说6，既是2的倍数，又是3的倍数，因此当每一个合数只被标记一次的时候，时间复杂度就可以变为$O(n)$，此时的线性筛法也称为欧拉筛法，主要的筛法就是每个合数只用其最小的质因数去筛。</p>
+<h5 id="欧拉筛法"><a href="#欧拉筛法" class="headerlink" title="欧拉筛法"></a>欧拉筛法</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Euler</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//返回的是从2到n的范围内素数的个数</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">1000000</span>];<span class="comment">//保存素数</span></span><br><span class="line">    <span class="keyword">int</span> is_prime[<span class="number">1000000</span>];<span class="comment">//标记是否为素数</span></span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) is_prime[i] = <span class="number">1</span>;<span class="comment">//初始为1，也可调用memset函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (is_prime[i])  prime[p++] = i;  </span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; i*prime[j] &lt;= n;j++)&#123;  </span><br><span class="line">          is_prime[i*prime[j]]=<span class="number">0</span>;<span class="comment">//保证该合数第一次被标记</span></span><br><span class="line">          <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法中最重要的是 <code>i%prime[j]==0</code>语句，当i是质数时，内层循环会在<code>prime[j]==i</code>时结束，当 i 为合数时，内层循环会在i 的第一个质因数结束。<code>is_prime[i*prime[j]]=0</code>也保证了合数被标记时是第一次标记。</p>
+<p>由于在线性筛中，每一个合数都是被最小的质因数筛掉，因此在求素数的过程中也得到了每个数的最小质因子，除此之外，<strong>筛法还可以用作求欧拉函数，求约数个数，求约数和</strong>等，遇到相关问题时再做详细介绍。</p>
 
     </div>
 
@@ -332,7 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#洛谷题目汇总（更新中）"><span class="nav-number">1.</span> <span class="nav-text">洛谷题目汇总（更新中）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1"><span class="nav-number">1.1.</span> <span class="nav-text">1</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数学相关编程题（更新中）"><span class="nav-number">1.</span> <span class="nav-text">数学相关编程题（更新中）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#洛谷题目汇总（更新中）"><span class="nav-number">2.</span> <span class="nav-text">洛谷题目汇总（更新中）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、组合数学简单应用"><span class="nav-number">2.1.</span> <span class="nav-text">1、组合数学简单应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、素数求解"><span class="nav-number">2.2.</span> <span class="nav-text">2、素数求解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#埃拉托斯特尼筛法"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">埃拉托斯特尼筛法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#欧拉筛法"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">欧拉筛法</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -396,13 +406,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">4k</span>
+    <span title="站点总字数">6k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4 分钟</span>
+    <span title="站点阅读时长">6 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
