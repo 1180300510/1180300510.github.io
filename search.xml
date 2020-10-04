@@ -1,34 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>数学有关的编程题</title>
-    <url>/post/6591a58c.html</url>
-    <content><![CDATA[<h2 id="数学相关编程题（更新中）"><a href="#数学相关编程题（更新中）" class="headerlink" title="数学相关编程题（更新中）"></a>数学相关编程题（更新中）</h2><h2 id="洛谷题目汇总（更新中）"><a href="#洛谷题目汇总（更新中）" class="headerlink" title="洛谷题目汇总（更新中）"></a>洛谷题目汇总（更新中）</h2><h3 id="1、组合数学简单应用"><a href="#1、组合数学简单应用" class="headerlink" title="1、组合数学简单应用"></a>1、组合数学简单应用</h3><blockquote>
-<font size="4">求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font>
-
-</blockquote>
-<p>这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数</p>
-<p>将这些数（每个顶点引出的对角线的相交顶点个数）相加，可以找到和与顶点个数之间的关系，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
-<p><img src="https://ae01.alicdn.com/kf/H544215b82374426aba85558681f85ca8y.png" alt="math_1.png" title="math_1.png" width="50%"></p>
-<p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<del>组合数学学得实在差</del>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了<strong>从n个顶点中取四个不同顶点的取法</strong>，就是一个非常简单的组合数学。</p>
-<p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)<em>(n-1)</em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n<em>(n-1)/2 </em>(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
-<h3 id="2、素数求解"><a href="#2、素数求解" class="headerlink" title="2、素数求解"></a>2、素数求解</h3><p>素数是因数只有1和本身的数，在编程入门题中常常会出现求素数的题，比如说求某一个范围内的所有质数，最简单的做法就是遍历这一范围的数判断是否符合素数的特征。而判断一个数n是否为素数，最简单的方法就是<strong>枚举</strong>，从2开始遍历到$sqrt(n)$,判断是否可以被n整除。但是显然这个比较的次数比较多，在一些有时间限制的情况下不适用，这里给出一个简单的改进方法，可以减少判断的次数。</p>
-<p>对于所有大于等于5的素数来说，被6除的余数是1或者5，因此在判断素数时可以以6为步长进行判断，实例代码如下</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isprime</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//返回true为素数</span></span><br><span class="line">    <span class="keyword">if</span>(x&lt;=<span class="number">3</span>) <span class="keyword">return</span> x&gt;<span class="number">1</span>; </span><br><span class="line">    <span class="keyword">if</span>(x%<span class="number">6</span>!=<span class="number">1</span> &amp;&amp; x%<span class="number">6</span>!=<span class="number">5</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="built_in">sqrt</span>(x);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">5</span>;i&lt;=num;i+=<span class="number">6</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x%i==<span class="number">0</span>||(x%(i+<span class="number">2</span>)==<span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>枚举的方法时间复杂度为$O(n^2)$，如果枚举的范围比较大时，还可以采用筛法来求素数。筛法的主要思路是：从小到大考虑每一个数，然后同时把当前这个数的所有在判断范围内的倍数即为合数，那么运行结束时没有被标记的就是素数了。第一遍筛掉的就是2的倍数（不包括2），第二遍筛掉的就是3的倍数（不包括3），第三遍筛掉的是5的倍数（4已被筛掉），依次类推。</p>
-<h5 id="埃拉托斯特尼筛法"><a href="#埃拉托斯特尼筛法" class="headerlink" title="埃拉托斯特尼筛法"></a>埃拉托斯特尼筛法</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Eratosthenes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//返回的是从2到n的范围内素数的个数</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">1000000</span>];<span class="comment">//保存素数</span></span><br><span class="line">    <span class="keyword">int</span> is_prime[<span class="number">1000000</span>];<span class="comment">//标记是否为素数</span></span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) is_prime[i] = <span class="number">1</span>;<span class="comment">//也可调用memset函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (is_prime[i]) &#123;</span><br><span class="line">        prime[p++] = i;  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i * i; j &lt;= n;j += i)  </span><br><span class="line">      <span class="comment">// 因为从 2 到 i - 1 的倍数我们之前筛过了，这里直接从 i的平方数开始，提高了运行速度</span></span><br><span class="line">          is_prime[j] = <span class="number">0</span>;  <span class="comment">// 是i的倍数的均不是素数</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>该筛法的时间复杂度为$O(nloglogn)$，列出复杂度的数学表达式为$n\sum_p 1/p$，根据调和级数可以证明，在这里不做展开。</p>
-<p>继续考虑该筛法，发现对于同一个合数来说有可能被标记了很多次，比如说6，既是2的倍数，又是3的倍数，因此当每一个合数只被标记一次的时候，时间复杂度就可以变为$O(n)$，此时的线性筛法也称为欧拉筛法，主要的筛法就是每个合数只用其最小的质因数去筛。</p>
-<h5 id="欧拉筛法"><a href="#欧拉筛法" class="headerlink" title="欧拉筛法"></a>欧拉筛法</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Euler</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//返回的是从2到n的范围内素数的个数</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">1000000</span>];<span class="comment">//保存素数</span></span><br><span class="line">    <span class="keyword">int</span> is_prime[<span class="number">1000000</span>];<span class="comment">//标记是否为素数</span></span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) is_prime[i] = <span class="number">1</span>;<span class="comment">//初始为1，也可调用memset函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (is_prime[i])  prime[p++] = i;  </span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; i*prime[j] &lt;= n;j++)&#123;  </span><br><span class="line">          is_prime[i*prime[j]]=<span class="number">0</span>;<span class="comment">//保证该合数第一次被标记</span></span><br><span class="line">          <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>算法中最重要的是 <code>i%prime[j]==0</code>语句，当i是质数时，内层循环会在<code>prime[j]==i</code>时结束，当 i 为合数时，内层循环会在i 的第一个质因数结束。<code>is_prime[i*prime[j]]=0</code>也保证了合数被标记时是第一次标记。</p>
-<p>由于在线性筛中，每一个合数都是被最小的质因数筛掉，因此在求素数的过程中也得到了每个数的最小质因子，除此之外，<strong>筛法还可以用作求欧拉函数，求约数个数，求约数和</strong>等，遇到相关问题时再做详细介绍。</p>
-]]></content>
+    <title>Hello, My Blog!</title>
+    <url>/post/cd2b7135.html</url>
+    <content><![CDATA[<h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog" class="headerlink" title="I want to test whether the article can subscribe to my blog!"></a>I want to test whether the article can subscribe to my blog!</h2>]]></content>
       <categories>
-        <category>Algorithm</category>
+        <category>Hexo</category>
       </categories>
-      <tags>
-        <tag>Algorithm</tag>
-      </tags>
   </entry>
   <entry>
     <title>C++输入输出流介绍</title>
@@ -96,22 +74,19 @@
       </tags>
   </entry>
   <entry>
-    <title>机器学习的基本知识</title>
-    <url>/post/c1a7cca9.html</url>
-    <content><![CDATA[<h3 id="1、机器学习的定义"><a href="#1、机器学习的定义" class="headerlink" title="1、机器学习的定义"></a>1、机器学习的定义</h3><p> 机器学习并不存在一个广泛认可的定义，这里给出两位前辈对机器学习的定义。Arthur Samuel提出的是一个旧的非正式的定义：机器学习是一个在不使用显式编程的情况下，给予计算机学习能力的领域。</p>
-<p>Tom Mitchell给出一个更现代化的定义：一个程序被认为能从经验E中学习，解决任务T，达到一个性能度量值P，当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升，并且当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升。一个非常应景的例子就是AI下棋，任务T是下棋，经验E就是上万次自我对弈联系的经验，而度量值T就是AI和新的对手下棋时，赢得比赛的概率。</p>
-<h3 id="2、监督学习（supervised-learning）"><a href="#2、监督学习（supervised-learning）" class="headerlink" title="2、监督学习（supervised learning）"></a>2、监督学习（supervised learning）</h3><p>给定一个数据集，我们事先已经知道了结果，或者说<strong>正确答案</strong>，而监督学习算法正是对该数据集做一种预测，是处于输入和输出之间的桥梁。监督学习可以分成两大类：回归和分类。在回归问题中，预测结果将是一个连续的输出，意味着需要将输入的变量映射到某个连续函数中，线性，二次函数等，因此也就有了线性回归，二次回归等。而在分类问题中，预测结果将是一个离散的输出，也就是若干个离散点的集合。</p>
-<p>一个回归问题的例子：给定一个房子大小和价格的数据集，预测某大小的房子的价格。而大小和价格之间可以使用一个连续函数来近似地表示，因此这就是一个回归问题。</p>
-<p>一个分类问题的例子：编写一个软件来检查客户的账户是否遭受过黑客的入侵，这就是一个典型的分类问题，可以将每个账户（样本）标记为正样本和负样本，比如可以用0表示预测为安全，1表示预测为账户被入侵。因此就可以使用监督学习来预测每一个离散值。</p>
-<h3 id="3、无监督学习（unsupervised-learning）"><a href="#3、无监督学习（unsupervised-learning）" class="headerlink" title="3、无监督学习（unsupervised learning）"></a>3、无监督学习（unsupervised learning）</h3><p>无监督学习和监督学习最大的不同就是给定的数据集并<strong>没有标签或者属性</strong>，也可以认为所有的数据都是一样的，没有区别的。而我们事先是不知道指一些数据会拥有什么意思，就像在一堆杂乱的东西中找到某一些共同的东西或结构。无监督学习中最重要的算法之一就是聚类算法，这里仅仅做一个简单介绍。</p>
-<p>一个无监督学习的例子，就是Google新闻的分类，他们从网络上手机成千上万的网络上的新闻，然后将他们分组，组成一个个新闻专题，而这些都是通过无监督学习，讲这些数量很大的行为自动的聚合在一起，即有关同一主题的新闻被聚集在一起，可能是来自BBC，CNN等不同报道。</p>
-<p>无监督学习算法还有一些比较经典的应用，比如说鸡尾酒宴问题，最简单的鸡尾酒宴问题就是输入两个录音，每个录音来自两个麦克风，记录两个人同步说话的声音。使用<strong>“鸡尾酒会算法”</strong>从录音输入中找到蕴含的分类，分离出两个被叠加在一起的音频源，也可以将环境声音分离。</p>
+    <title>二分查找及相关题目</title>
+    <url>/post/23f598d4.html</url>
+    <content><![CDATA[<p>二分查找是一种比较常见的算法，可以说是入门级的算法，但一些细节的考虑，尤其是边界仍然是很容易出错的，而且对于一些题目可能我们不会很快地想到使用二分的方法，在这篇文章中记录一些二分查找的典型题目，以备复习。</p>
+<h3 id="跳石头"><a href="#跳石头" class="headerlink" title="跳石头"></a><a href="https://www.luogu.com.cn/problem/P2678" target="_blank" rel="noopener">跳石头</a></h3><p>这道题目的题意是比较清晰的，输入N块石头和至多M块可搬去的石头，还有起点和终点之间的距离L，以及N块石头到起点的距离，由于距离的范围是$1≤L≤10^9$，显然距离使用int型数组存储就可以。题目需要我们求的是搬去至多M块石头后，任意两块相邻石头之间的距离最短为多少，但这个最短距离又要求是所有搬石头方案中最长的，一句话概括就是求最长的最短距离。</p>
+<p>一开始做这道题时一直在根据石头的编号来进行二分，发现这样处理搬去的石头就很麻烦。因此，直接对要求的最短距离进行二分查找。一开始的距离mid为$L/2$，即$mid=(left+right)/2,left=0,right=L,$以起点为初始位置，从第一块石头开始遍历，如果当前遍历石头与初始位置之间的距离大于mid，则更改初始位置为第一块石头，否则移除第一块石头，并对移除的数量计数，直到遍历到最后一块石头。每一次遍历完石头后，比较移除的数量与M之间的大小，如果M较大，则在$[mid+1,right]$的范围内寻找最短距离，否则，在$[left,mid-1]$的范围内二分查找最短距离。</p>
+<p>本题的代码还算是比较简单的。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> L,N,M;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;     </span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;N&gt;&gt;M;</span><br><span class="line">    <span class="keyword">long</span> stock[<span class="number">50005</span>];<span class="comment">//stock[i]为第i块石头与前一块的距离</span></span><br><span class="line">    stock[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;stock[i];</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">int</span> left=<span class="number">0</span>,right=L,mid,pick,ans;<span class="comment">//pick为已经取走的石头的个数,mid是选定的一段距离，小于mid的距离石头都得搬走</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>;<span class="comment">//目前所在的石头</span></span><br><span class="line">        pick=<span class="number">0</span>;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(stock[i]-stock[now]&lt;mid)&#123;<span class="comment">//比mid小的距离都得搬走一块石头</span></span><br><span class="line">                pick++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> now=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pick&lt;=M)&#123;</span><br><span class="line">            ans=mid;</span><br><span class="line">            left=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> right=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>Machine Learning</category>
+        <category>Algorithm</category>
       </categories>
       <tags>
-        <tag>Machine Learning</tag>
+        <tag>Algorithm</tag>
       </tags>
   </entry>
   <entry>
@@ -147,30 +122,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello, My Blog!</title>
-    <url>/post/cd2b7135.html</url>
-    <content><![CDATA[<h2 id="I-want-to-test-whether-the-article-can-subscribe-to-my-blog"><a href="#I-want-to-test-whether-the-article-can-subscribe-to-my-blog" class="headerlink" title="I want to test whether the article can subscribe to my blog!"></a>I want to test whether the article can subscribe to my blog!</h2>]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>二分查找及相关题目</title>
-    <url>/post/23f598d4.html</url>
-    <content><![CDATA[<p>二分查找是一种比较常见的算法，可以说是入门级的算法，但一些细节的考虑，尤其是边界仍然是很容易出错的，而且对于一些题目可能我们不会很快地想到使用二分的方法，在这篇文章中记录一些二分查找的典型题目，以备复习。</p>
-<h3 id="跳石头"><a href="#跳石头" class="headerlink" title="跳石头"></a><a href="https://www.luogu.com.cn/problem/P2678" target="_blank" rel="noopener">跳石头</a></h3><p>这道题目的题意是比较清晰的，输入N块石头和至多M块可搬去的石头，还有起点和终点之间的距离L，以及N块石头到起点的距离，由于距离的范围是$1≤L≤10^9$，显然距离使用int型数组存储就可以。题目需要我们求的是搬去至多M块石头后，任意两块相邻石头之间的距离最短为多少，但这个最短距离又要求是所有搬石头方案中最长的，一句话概括就是求最长的最短距离。</p>
-<p>一开始做这道题时一直在根据石头的编号来进行二分，发现这样处理搬去的石头就很麻烦。因此，直接对要求的最短距离进行二分查找。一开始的距离mid为$L/2$，即$mid=(left+right)/2,left=0,right=L,$以起点为初始位置，从第一块石头开始遍历，如果当前遍历石头与初始位置之间的距离大于mid，则更改初始位置为第一块石头，否则移除第一块石头，并对移除的数量计数，直到遍历到最后一块石头。每一次遍历完石头后，比较移除的数量与M之间的大小，如果M较大，则在$[mid+1,right]$的范围内寻找最短距离，否则，在$[left,mid-1]$的范围内二分查找最短距离。</p>
-<p>本题的代码还算是比较简单的。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> L,N,M;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;     </span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;L&gt;&gt;N&gt;&gt;M;</span><br><span class="line">    <span class="keyword">long</span> stock[<span class="number">50005</span>];<span class="comment">//stock[i]为第i块石头与前一块的距离</span></span><br><span class="line">    stock[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;stock[i];</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">int</span> left=<span class="number">0</span>,right=L,mid,pick,ans;<span class="comment">//pick为已经取走的石头的个数,mid是选定的一段距离，小于mid的距离石头都得搬走</span></span><br><span class="line">    <span class="keyword">while</span>(left&lt;=right)&#123;</span><br><span class="line">        <span class="keyword">int</span> now=<span class="number">0</span>;<span class="comment">//目前所在的石头</span></span><br><span class="line">        pick=<span class="number">0</span>;</span><br><span class="line">        mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(stock[i]-stock[now]&lt;mid)&#123;<span class="comment">//比mid小的距离都得搬走一块石头</span></span><br><span class="line">                pick++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> now=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pick&lt;=M)&#123;</span><br><span class="line">            ans=mid;</span><br><span class="line">            left=mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> right=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Algorithm</category>
-      </categories>
-      <tags>
-        <tag>Algorithm</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linear_regression</title>
     <url>/post/4970fdc9.html</url>
     <content><![CDATA[]]></content>
@@ -179,6 +130,55 @@
       </categories>
       <tags>
         <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>机器学习的基本知识</title>
+    <url>/post/c1a7cca9.html</url>
+    <content><![CDATA[<h3 id="1、机器学习的定义"><a href="#1、机器学习的定义" class="headerlink" title="1、机器学习的定义"></a>1、机器学习的定义</h3><p> 机器学习并不存在一个广泛认可的定义，这里给出两位前辈对机器学习的定义。Arthur Samuel提出的是一个旧的非正式的定义：机器学习是一个在不使用显式编程的情况下，给予计算机学习能力的领域。</p>
+<p>Tom Mitchell给出一个更现代化的定义：一个程序被认为能从经验E中学习，解决任务T，达到一个性能度量值P，当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升，并且当且仅当有了经验E之后，经过P评判，程序在处理T时的性能有所提升。一个非常应景的例子就是AI下棋，任务T是下棋，经验E就是上万次自我对弈联系的经验，而度量值T就是AI和新的对手下棋时，赢得比赛的概率。</p>
+<h3 id="2、监督学习（supervised-learning）"><a href="#2、监督学习（supervised-learning）" class="headerlink" title="2、监督学习（supervised learning）"></a>2、监督学习（supervised learning）</h3><p>给定一个数据集，我们事先已经知道了结果，或者说<strong>正确答案</strong>，而监督学习算法正是对该数据集做一种预测，是处于输入和输出之间的桥梁。监督学习可以分成两大类：回归和分类。在回归问题中，预测结果将是一个连续的输出，意味着需要将输入的变量映射到某个连续函数中，线性，二次函数等，因此也就有了线性回归，二次回归等。而在分类问题中，预测结果将是一个离散的输出，也就是若干个离散点的集合。</p>
+<p>一个回归问题的例子：给定一个房子大小和价格的数据集，预测某大小的房子的价格。而大小和价格之间可以使用一个连续函数来近似地表示，因此这就是一个回归问题。</p>
+<p>一个分类问题的例子：编写一个软件来检查客户的账户是否遭受过黑客的入侵，这就是一个典型的分类问题，可以将每个账户（样本）标记为正样本和负样本，比如可以用0表示预测为安全，1表示预测为账户被入侵。因此就可以使用监督学习来预测每一个离散值。</p>
+<h3 id="3、无监督学习（unsupervised-learning）"><a href="#3、无监督学习（unsupervised-learning）" class="headerlink" title="3、无监督学习（unsupervised learning）"></a>3、无监督学习（unsupervised learning）</h3><p>无监督学习和监督学习最大的不同就是给定的数据集并<strong>没有标签或者属性</strong>，也可以认为所有的数据都是一样的，没有区别的。而我们事先是不知道指一些数据会拥有什么意思，就像在一堆杂乱的东西中找到某一些共同的东西或结构。无监督学习中最重要的算法之一就是聚类算法，这里仅仅做一个简单介绍。</p>
+<p>一个无监督学习的例子，就是Google新闻的分类，他们从网络上手机成千上万的网络上的新闻，然后将他们分组，组成一个个新闻专题，而这些都是通过无监督学习，讲这些数量很大的行为自动的聚合在一起，即有关同一主题的新闻被聚集在一起，可能是来自BBC，CNN等不同报道。</p>
+<p>无监督学习算法还有一些比较经典的应用，比如说鸡尾酒宴问题，最简单的鸡尾酒宴问题就是输入两个录音，每个录音来自两个麦克风，记录两个人同步说话的声音。使用<strong>“鸡尾酒会算法”</strong>从录音输入中找到蕴含的分类，分离出两个被叠加在一起的音频源，也可以将环境声音分离。</p>
+]]></content>
+      <categories>
+        <category>Machine Learning</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数学有关的编程题</title>
+    <url>/post/6591a58c.html</url>
+    <content><![CDATA[<h2 id="数学相关编程题（更新中）"><a href="#数学相关编程题（更新中）" class="headerlink" title="数学相关编程题（更新中）"></a>数学相关编程题（更新中）</h2><h2 id="洛谷题目汇总（更新中）"><a href="#洛谷题目汇总（更新中）" class="headerlink" title="洛谷题目汇总（更新中）"></a>洛谷题目汇总（更新中）</h2><h3 id="1、组合数学简单应用"><a href="#1、组合数学简单应用" class="headerlink" title="1、组合数学简单应用"></a>1、组合数学简单应用</h3><blockquote>
+<font size="4">求n个顶点凸边形的对角线的交点个数，其中n满足$3\leq n\leq10^5$ </font>
+
+</blockquote>
+<p>这道题可以通过寻找规律得到结果，我们知道n顶点凸多边形的每一个顶点拥有的对角线条数为n-3，从某一顶点出发画出n-3条对角线，再从其余顶点出发画n-3条对角线，分别统计其两两相交的顶点，可以找到规律，如下即为七边形（左）和十边形（右）的相交顶点数</p>
+<p>将这些数（每个顶点引出的对角线的相交顶点个数）相加，可以找到和与顶点个数之间的关系，按照规律，可以猜测存在组合数学的关系，即$C_{n}^{n-4}=sum$</p>
+<p><img src="https://ae01.alicdn.com/kf/H544215b82374426aba85558681f85ca8y.png" alt="math_1.png" title="math_1.png" width="50%"></p>
+<p>参考了网上对该问题的解读，介绍如何直接得出sum和n之间的组合数学关系（<del>组合数学学得实在差</del>）。对于一个n顶点凸边形来说，不会存在三条对角线交于一点的情况，因此交点只由两条对角线相交形成，而两条对角线又涉及到四个顶点，因此只需要确定确定四个顶点的搭配数量，此时问题就转换成了<strong>从n个顶点中取四个不同顶点的取法</strong>，就是一个非常简单的组合数学。</p>
+<p>接下来的问题就是编程解决组合数的求解。按照公式，sum=(n-3)(n-2)<em>(n-1)</em>n/4!，但是需要注意的是如果直接公式代入，即使对于unsigned long long的数据类型来说，也会造成溢出，只需做一个小的改动，sum=n<em>(n-1)/2 </em>(n-2)/3 *(n-3)/4，这也保证了sum是整数（非去下整得到的整数）。</p>
+<h3 id="2、素数求解"><a href="#2、素数求解" class="headerlink" title="2、素数求解"></a>2、素数求解</h3><p>素数是因数只有1和本身的数，在编程入门题中常常会出现求素数的题，比如说求某一个范围内的所有质数，最简单的做法就是遍历这一范围的数判断是否符合素数的特征。而判断一个数n是否为素数，最简单的方法就是<strong>枚举</strong>，从2开始遍历到$sqrt(n)$,判断是否可以被n整除。但是显然这个比较的次数比较多，在一些有时间限制的情况下不适用，这里给出一个简单的改进方法，可以减少判断的次数。</p>
+<p>对于所有大于等于5的素数来说，被6除的余数是1或者5，因此在判断素数时可以以6为步长进行判断，实例代码如下</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isprime</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//返回true为素数</span></span><br><span class="line">    <span class="keyword">if</span>(x&lt;=<span class="number">3</span>) <span class="keyword">return</span> x&gt;<span class="number">1</span>; </span><br><span class="line">    <span class="keyword">if</span>(x%<span class="number">6</span>!=<span class="number">1</span> &amp;&amp; x%<span class="number">6</span>!=<span class="number">5</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">int</span> num=<span class="built_in">sqrt</span>(x);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">5</span>;i&lt;=num;i+=<span class="number">6</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(x%i==<span class="number">0</span>||(x%(i+<span class="number">2</span>)==<span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>枚举的方法时间复杂度为$O(n^2)$，如果枚举的范围比较大时，还可以采用筛法来求素数。筛法的主要思路是：从小到大考虑每一个数，然后同时把当前这个数的所有在判断范围内的倍数即为合数，那么运行结束时没有被标记的就是素数了。第一遍筛掉的就是2的倍数（不包括2），第二遍筛掉的就是3的倍数（不包括3），第三遍筛掉的是5的倍数（4已被筛掉），依次类推。</p>
+<h5 id="埃拉托斯特尼筛法"><a href="#埃拉托斯特尼筛法" class="headerlink" title="埃拉托斯特尼筛法"></a>埃拉托斯特尼筛法</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Eratosthenes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//返回的是从2到n的范围内素数的个数</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">1000000</span>];<span class="comment">//保存素数</span></span><br><span class="line">    <span class="keyword">int</span> is_prime[<span class="number">1000000</span>];<span class="comment">//标记是否为素数</span></span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) is_prime[i] = <span class="number">1</span>;<span class="comment">//也可调用memset函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (is_prime[i]) &#123;</span><br><span class="line">        prime[p++] = i;  </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i * i; j &lt;= n;j += i)  </span><br><span class="line">      <span class="comment">// 因为从 2 到 i - 1 的倍数我们之前筛过了，这里直接从 i的平方数开始，提高了运行速度</span></span><br><span class="line">          is_prime[j] = <span class="number">0</span>;  <span class="comment">// 是i的倍数的均不是素数</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该筛法的时间复杂度为$O(nloglogn)$，列出复杂度的数学表达式为$n\sum_p 1/p$，根据调和级数可以证明，在这里不做展开。</p>
+<p>继续考虑该筛法，发现对于同一个合数来说有可能被标记了很多次，比如说6，既是2的倍数，又是3的倍数，因此当每一个合数只被标记一次的时候，时间复杂度就可以变为$O(n)$，此时的线性筛法也称为欧拉筛法，主要的筛法就是每个合数只用其最小的质因数去筛。</p>
+<h5 id="欧拉筛法"><a href="#欧拉筛法" class="headerlink" title="欧拉筛法"></a>欧拉筛法</h5><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Euler</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;<span class="comment">//返回的是从2到n的范围内素数的个数</span></span><br><span class="line">    <span class="keyword">int</span> prime[<span class="number">1000000</span>];<span class="comment">//保存素数</span></span><br><span class="line">    <span class="keyword">int</span> is_prime[<span class="number">1000000</span>];<span class="comment">//标记是否为素数</span></span><br><span class="line">    <span class="keyword">int</span> p=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) is_prime[i] = <span class="number">1</span>;<span class="comment">//初始为1，也可调用memset函数</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (is_prime[i])  prime[p++] = i;  </span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; i*prime[j] &lt;= n;j++)&#123;  </span><br><span class="line">          is_prime[i*prime[j]]=<span class="number">0</span>;<span class="comment">//保证该合数第一次被标记</span></span><br><span class="line">          <span class="keyword">if</span>(i%prime[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>算法中最重要的是 <code>i%prime[j]==0</code>语句，当i是质数时，内层循环会在<code>prime[j]==i</code>时结束，当 i 为合数时，内层循环会在i 的第一个质因数结束。<code>is_prime[i*prime[j]]=0</code>也保证了合数被标记时是第一次标记。</p>
+<p>由于在线性筛中，每一个合数都是被最小的质因数筛掉，因此在求素数的过程中也得到了每个数的最小质因子，除此之外，<strong>筛法还可以用作求欧拉函数，求约数个数，求约数和</strong>等，遇到相关问题时再做详细介绍。</p>
+]]></content>
+      <categories>
+        <category>Algorithm</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
       </tags>
   </entry>
 </search>
